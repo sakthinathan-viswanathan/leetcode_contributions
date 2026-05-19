@@ -19,7 +19,7 @@ public:
     int rob(vector<int>& nums) {
         int n = nums.size();
 
-        dp.resize(n + 1, -1);
+        dp.resize(n, -1);
 
         return recursion(nums, n-1);
     }
