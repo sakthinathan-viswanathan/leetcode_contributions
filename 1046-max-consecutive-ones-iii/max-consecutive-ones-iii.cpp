@@ -17,8 +17,6 @@ public:
 
             while(zeros > k){
                 
-                
-
                 if(nums[left] == 0){
                     zeros--;
                 }
