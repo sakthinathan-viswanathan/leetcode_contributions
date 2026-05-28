@@ -2,31 +2,28 @@ class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
 
-        int currentsum=0;
-        int minWindowsize=INT_MAX;
-       
+        int n = nums.size();
 
-        int l=0;
-        int r=0;
 
-        while(r < nums.size()){
+        int sum = 0;
 
-            currentsum += nums[r];
-            r++;
+        int res = INT_MAX;
 
-            while(currentsum >= target){
+        int left = 0;
+        for(int right = 0;right<n;right++){
 
-                int curWindowSize = r-l;
+            sum += nums[right];
 
-                minWindowsize=min(minWindowsize,curWindowSize);
+            while(sum >= target){
+                
+                res = min(res,(right-left+1));
 
-                currentsum -= nums[l];
-                l++;
-
+                    sum -= nums[left];
+                    left++;
             }
-        }
 
-        return minWindowsize == INT_MAX?0:minWindowsize;
+        }
         
+        return res == INT_MAX?0:res;
     }
 };
