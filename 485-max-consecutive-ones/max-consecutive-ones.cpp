@@ -19,7 +19,7 @@ public:
                 zero++;
             }
 
-            while(zero >= 1){
+            while(zero == 1){
 
                 if(nums[left] == 1){
                     count--;
