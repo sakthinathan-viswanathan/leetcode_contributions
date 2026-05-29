@@ -15,7 +15,7 @@ public:
     TreeNode* second = nullptr;
 
     TreeNode* pre  = new TreeNode(INT_MIN);
-    
+
     void recursion(TreeNode* root){
 
         if(!root){
@@ -42,7 +42,7 @@ public:
 
         recursion(root);
 
-       swap(first->val,second->val);
+        swap(first->val,second->val);
 
         
     }
