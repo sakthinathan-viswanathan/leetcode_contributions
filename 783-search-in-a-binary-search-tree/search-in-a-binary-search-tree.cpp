@@ -12,27 +12,20 @@
 class Solution {
 public:
 
-    TreeNode* recursion(TreeNode* root,int val){
+    TreeNode* recursion(TreeNode* root,int data){
 
-        if(!root){
-            return nullptr;
-        }
-
-        if(root->val == val){
+         if(root == nullptr || root->val == data){
             return root;
         }
-        else if(root->val  > val){
-           return recursion(root->left,val);
+
+        if(data < root->val){
+            return recursion(root->left, data);
         }
-        else
-        {
-           return recursion(root->right,val);
-        }
+
+        return recursion(root->right, data);
 
     }
-    TreeNode* searchBST(TreeNode* root, int val) {
-
-        return recursion(root,val);
-        
+    TreeNode* searchBST(TreeNode* root, int data) {
+        return recursion(root,data);
     }
 };
