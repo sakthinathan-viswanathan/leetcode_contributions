@@ -11,8 +11,6 @@
  */
 class Solution {
 public:
-
-
     bool recursion(TreeNode* root,long minval,long maxval){
 
         if(!root){
