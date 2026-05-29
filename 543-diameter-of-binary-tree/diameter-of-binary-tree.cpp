@@ -11,10 +11,8 @@
  */
 class Solution {
 public:
-    int ans = 0;
-
-    int recursion(TreeNode* root){
-
+    int diameter = 0;
+    int recursion(TreeNode* root) {
         if(root == nullptr){
             return 0;
         }
@@ -22,15 +20,15 @@ public:
         int l = recursion(root->left);
         int r = recursion(root->right);
 
-        ans = max(ans,l+r);
+        diameter = max(diameter,l+r);
 
-        return  1+max(l,r);
+        return max(l,r) + 1;
     }
 
-    int diameterOfBinaryTree(TreeNode* root) {
-        
+    int diameterOfBinaryTree(TreeNode* root){
         recursion(root);
 
-        return ans;
+        return diameter;
+
     }
 };
