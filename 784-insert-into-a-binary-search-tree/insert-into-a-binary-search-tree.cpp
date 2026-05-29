@@ -9,42 +9,22 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-            TreeNode* nn = new TreeNode(val);
 
-            if(root == nullptr){
-                root = nn;
-                return root;
-            }
+        if(root == nullptr){
+            return new TreeNode(val);
+        }
 
-            TreeNode* temp = root;
+        if(val < root->val){
+            root->left = insertIntoBST(root->left, val);
+        }
+        else{
+            root->right = insertIntoBST(root->right, val);
+        }
 
-            while(true){
-
-                if(temp->val > val){
-                    if(temp->left == nullptr){
-                        temp->left = nn;
-                        return root;
-                    }
-
-                    temp = temp->left;
-                }
-                else
-                {
-                    if(temp->right == nullptr){
-                        temp->right = nn;
-                        return root;
-                    }
-
-                    temp = temp->right;
-                }
-            }
-
-
-            return root;
-
-        
+        return root;
     }
 };
