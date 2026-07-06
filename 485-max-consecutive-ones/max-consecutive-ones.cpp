@@ -5,38 +5,20 @@ public:
         int n = nums.size();
 
         int res = 0;
-        int count = 0;
-        int zero = 0;
- 
+
         int left = 0;
-        for(int right = 0;right<n;right++){
+        int i = 0;
+        for( i=0;i<n;i++){
 
-            if(nums[right] == 1){
-                count++;
+            if(nums[i] != 1){
+                res = max((i-left),res);
+                cout<<left<<" "<<i<<endl;
+                left = i+1;
             }
-            else
-            {
-                zero++;
-            }
-
-            while(zero == 1){
-
-                if(nums[left] == 1){
-                    count--;
-                }
-                else
-                {
-                    zero--;
-                }
-
-                left++;
-            }
-
-            res = max(res,count);
-
         }
 
-        return res;
+          res = max((i-left),res);
         
+        return res;
     }
 };
