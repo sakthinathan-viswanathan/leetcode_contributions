@@ -4,38 +4,32 @@ public:
 
         int n = nums.size();
 
+        unordered_map<int,int>mp;
+
         long long sum = 0;
         long long res = 0;
 
-        unordered_map<int,int>mp;
-
         int left = 0;
-
         for(int right = 0;right<n;right++){
 
-            sum += nums[right];
             mp[nums[right]]++;
+            sum += nums[right];
 
             if(right-left+1 == k){
                 if(mp.size() == k){
                     res = max(res,sum);
                 }
 
-                sum -= nums[left];
                 mp[nums[left]]--;
-                
-                if(mp[nums[left]] == 0)
-                {
+                sum -= nums[left];
+
+                if(mp[nums[left]] == 0){
                     mp.erase(nums[left]);
                 }
 
                 left++;
-
             }
         }
-
-
-        return res;
-        
+        return res; 
     }
 };
