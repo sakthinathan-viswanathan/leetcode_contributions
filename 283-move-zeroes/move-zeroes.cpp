@@ -5,21 +5,14 @@ public:
         int n = nums.size();
 
         int left = 0;
+
         for(int right = 0;right<n;right++){
-
-
             if(nums[right] != 0){
-                nums[left] = nums[right];
+                swap(nums[left],nums[right]);
                 left++;
             }
-            
         }
-        while(left < n){
-            nums[left] = 0;
-            left++;
-        }
-        
+
         return ;
     }
-
 };
