@@ -4,22 +4,31 @@ public:
 
         int n = nums.size();
 
-        vector<int>prefix;
-        prefix.push_back(0);
+        int res = 0;
 
-        for(int i:nums){
-            prefix.push_back(prefix.back() + i);
+        vector<int>prefix(n);
+
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            prefix[i] = sum;
         }
 
-       for(int i=0;i<n;i++){
-        int leftsum = prefix[i];
-        int rightsum = prefix[n] - prefix[i+1];
+        for(int i=0;i<n;i++){
+            int left = 0;
 
-        if(leftsum == rightsum){
-            return i;
+            if(i > 0){
+                left = prefix[i-1] ;
+            }
+
+            int right = prefix[n-1] - prefix[i];
+
+            if(left == right){
+                return i;
+            }
         }
-       }
-       return -1;
-        
+
+        return -1;
+
     }
 };
