@@ -4,33 +4,29 @@ public:
 
         int n = nums.size();
 
-        int l = 0;
-        int r = n-1;
+        vector<int>res;
 
-        while(l < r){
+        int left = 0;
+        int right = n-1;
 
-            int sum = nums[l]  + nums[r];
+        while(left < right){
+
+            int sum = nums[left] + nums[right];
 
             if(sum == target){
-                return {l+1,r+1};
-
-                l++;
-                r--;
-
-                while(l<r && nums[l] == nums[l+1])l++;
-                while(l<r && nums[r] == nums[r-1])r--;
+                //res = {left,right};
+                return {left+1,right+1};
             }
-            else if(sum < target){
-                l++;
+            else if(sum > target){
+                right--;
             }
             else
             {
-                r--;
+                left++;
             }
-
         }
 
-        return {};
+        return {-1,-1};
         
     }
 };
