@@ -4,26 +4,30 @@ public:
 
         int n = nums.size();
 
+        deque<int>mq;
         vector<int>res;
 
-        deque<int>que;
+        int left = 0;
+        for(int right=0;right<n;right++){
 
-      for(int i=0;i<n;i++){
-
-        while(!que.empty() && que.front() <= i-k){
-            que.pop_front();
-        }
-
-        while(!que.empty() && nums[que.back()] <= nums[i]){
-            que.pop_back();
-        }
-
-         que.push_back(i);
-
-            if(i >= k - 1) {
-                res.push_back(nums[que.front()]);
+            while(!mq.empty() && nums[mq.back()] <= nums[right]){
+                mq.pop_back();
             }
-      }
-       return  res;
+
+            mq.push_back(right);
+
+            if((right-left+1) == k){
+                res.push_back(nums[mq.front()]);
+                left++;
+            }
+
+            while(!mq.empty() && mq.front() < left){
+                mq.pop_front();
+            }
+
+
+        }
+
+        return res;
     }
 };
