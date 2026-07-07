@@ -1,12 +1,10 @@
 class Solution {
 public:
-    bool isPalin(string s){
-        int l = 0;
-        int r = s.length()-1;
+    bool checkpalindrome(string s,int l,int r){
 
         while(l<r){
-
             if(s[l] != s[r]){
+                cout<<"s[l] "<<s[l]<<" s[r] "<<s[r]<<endl;
                 return false;
             }
 
@@ -18,15 +16,25 @@ public:
     }
     bool isPalindrome(string s) {
 
-        string cur = "";
+        int n = s.size();
 
-        int n = s.length();
-        for(char c:s){
-            if(isalnum(c)){
-                    cur += tolower(c);
+        if(s.size() == 1){
+            return true;
+        }
+
+        string pure = "";
+
+        for(int i=0;i<n;i++){
+            if(isalnum(s[i])){
+                pure += tolower(s[i]);
             }
         }
 
-       return isPalin(cur);
+        bool found = checkpalindrome(pure,0,pure.size()-1);
+
+
+
+        
+        return found;
     }
 };
