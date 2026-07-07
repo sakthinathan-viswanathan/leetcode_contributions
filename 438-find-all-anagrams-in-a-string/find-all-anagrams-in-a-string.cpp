@@ -2,8 +2,9 @@ class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
 
-        int n = s.length();
-        int m = p.length();
+        int n = s.size();
+
+        int k = p.size();
 
         unordered_map<char,int>freq;
 
@@ -13,33 +14,30 @@ public:
 
         vector<int>res;
 
+
         int left = 0;
-        for(int right = 0;right<n;right++){
+        for(int i=0;i<n;i++){
             
-            freq[s[right]]--;
+                freq[s[i]]--;
 
-            if(freq[s[right]] == 0){
-                freq.erase(s[right]);
-            }
-
-            if((right-left +1 ) == m){
-
-                if(freq.empty()){
-
-                    res.push_back(left);
-
+                if(freq[s[i]] == 0){
+                    freq.erase(s[i]);
                 }
 
-    
-                freq[s[left]]++;
+                if(i - left + 1 == k){
 
-                if(freq[s[left]] == 0){
-                    freq.erase(s[left]);
+                    if(freq.size() == 0){
+                        res.push_back(left);
+                    }
+
+                    freq[s[left]]++;
+
+                    if(freq[s[left]] == 0){
+                        freq.erase(s[left]);
+                    }
+
+                    left++;
                 }
-
-                left++;
-            }
-
         }
 
         return res;
