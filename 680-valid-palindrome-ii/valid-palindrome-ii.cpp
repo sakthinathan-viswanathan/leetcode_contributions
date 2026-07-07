@@ -1,20 +1,16 @@
 class Solution {
 public:
-
-    bool isPalindrome(string s,int l,int r){
+    bool checkpalindrome(string s,int l,int r){
         while(l<r){
-
             if(s[l] != s[r]){
                 return false;
             }
-
             l++;
             r--;
         }
 
         return true;
     }
-
     bool validPalindrome(string s) {
 
         int n = s.length();
@@ -29,12 +25,11 @@ public:
             }
             else
             {
-                return isPalindrome(s,l+1,r) ||
-                        isPalindrome(s,l,r-1);
+                return checkpalindrome(s,l+1,r) || checkpalindrome(s,l,r-1);
             }
+        
         }
 
         return true;
-        
     }
 };
