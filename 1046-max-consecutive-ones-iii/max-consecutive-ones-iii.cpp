@@ -4,31 +4,31 @@ public:
 
         int n = nums.size();
 
-        int res = 0;
-        int zeros = 0;
-        unordered_map<int,int>mp(2);
+        unordered_map<int,int>mp;
 
         int left = 0;
-        for(int right=0;right<n;right++){
-            if(nums[right] == 0){
-                zeros++;
-              
-            }
+        int ans = 0;
 
-            while(zeros > k){
-                
-                if(nums[left] == 0){
-                    zeros--;
+        for(int right = 0;right<n;right++){
+
+            mp[nums[right]]++;
+
+            while(mp[0] > k){
+                ans = max(ans,(right-left));
+
+                mp[nums[left]]--;
+
+                if(mp[nums[left]] == 0){
+                    mp.erase(nums[left]);
                 }
 
                 left++;
-
             }
-
-            res = max(res,right-left+1);
-        
         }
+
+        ans = max(ans,(n-left));
+
+        return ans;
         
-        return res;
     }
 };
