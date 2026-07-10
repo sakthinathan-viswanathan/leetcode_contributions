@@ -1,30 +1,47 @@
 class Solution {
 public:
+    struct compare{
+        bool operator()(pair<int,char> &a,pair<int,char> &b)
+        const{
+
+            if(a.first == b.first){
+                return a.second > b.second;
+            }
+
+            return a.first < b.first;
+        }
+    };
     string frequencySort(string s) {
+
         int n = s.size();
 
-        unordered_map<char,int>freq;
+        unordered_map<char,int>mp;
 
-        for(int c:s){
-            freq[c]++;
+        for(char c:s){
+            mp[c]++;
         }
 
-        vector<vector<char>>bucket(n+1);
 
-        for(auto &i:freq){
-            bucket[i.second].push_back(i.first);
+        priority_queue<
+        pair<int,char>,
+        vector<pair<int,char>>,
+        compare>min_pq;
+
+
+        for(auto& i:mp){
+            min_pq.push({i.second,i.first});
         }
 
-        string ans = "";
+        string res = "";
 
-        for(int i=bucket.size()-1;i>=0;i--){
-            for(char num:bucket[i]){
+        while(!min_pq.empty()) {
 
-               ans.append(i,num);
-            }
+            auto [freq, ch] = min_pq.top();
+            min_pq.pop();
+
+            res.append(freq, ch);
         }
 
-        return ans;
+        return res;
     }
-
 };
