@@ -1,37 +1,38 @@
 class Solution {
 public:
+    struct compare{
+        bool operator()(pair<int,int> &a,pair<int,int>& b){
+            return a.first > b.first;
+        }
+    };
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        
 
         int n = nums.size();
 
-        unordered_map<int,int>freq;
+        unordered_map<int,int>mp;
 
         for(int i:nums){
-            freq[i]++;
+            mp[i]++;
         }
 
-        vector<vector<int>>bucket(n+1);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,compare>pq;
 
-        for(auto &i:freq){
-            bucket[i.second].push_back(i.first);
+        for(auto i:mp){
+            pq.push({i.second,i.first});
+
+            if (pq.size() > k)
+            pq.pop();
         }
 
-        vector<int>ans;
+        vector<int>res;
 
-        for(int i=bucket.size()-1;i>=0 && ans.size() <= k;i--){
-           for(int num:bucket[i]){
-            ans.push_back(num);
-
-            if(ans.size() == k){
-                return ans;
-            }
-           }
-
-
+        while(!pq.empty()){
+           res.push_back(pq.top().second);
+           pq.pop();
         }
 
-        return ans;
 
+        return res;
+        
     }
 };
