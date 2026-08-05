@@ -1,32 +1,35 @@
 class Solution {
 public:
 
-    void backtrack(vector<int> &cur,int ind,vector<vector<int>> & res,vector<int> &nums){
+    void backtrack(int start, vector<int>& cur,
+                   vector<vector<int>>& res,
+                   vector<int>& nums) {
 
+        res.push_back(cur);
 
-        if(ind == nums.size()){
+        for(int i = start; i < nums.size(); i++) {
 
-            res.push_back(cur);
-            return ;
+            // Skip duplicate choices at the same level
+            if(i > start && nums[i] == nums[i-1])
+                continue;
+
+            cur.push_back(nums[i]);
+
+            backtrack(i + 1, cur, res, nums);
+
+            cur.pop_back();
         }
-
-        cur.push_back(nums[ind]);
-        backtrack(cur,ind+1,res,nums);
-
-        cur.pop_back();
-        backtrack(cur,ind+1,res,nums);
-
     }
 
     vector<vector<int>> subsets(vector<int>& nums) {
 
-        vector<int>cur;
+        sort(nums.begin(), nums.end());
 
-        vector<vector<int>>res;
+        vector<vector<int>> res;
+        vector<int> cur;
 
+        backtrack(0, cur, res, nums);
 
-        backtrack(cur,0,res,nums);
-        
         return res;
     }
 };
