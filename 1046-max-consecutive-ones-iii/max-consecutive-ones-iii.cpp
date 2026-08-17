@@ -6,29 +6,31 @@ public:
 
         unordered_map<int,int>mp;
 
-        int left = 0;
-        int ans = 0;
+        int res = 0;
 
-        for(int right = 0;right<n;right++){
+        int l = 0,r=0;
+        for(r = 0;r<n;r++){
 
-            mp[nums[right]]++;
+            mp[nums[r]]++;
 
             while(mp[0] > k){
-                ans = max(ans,(right-left));
 
-                mp[nums[left]]--;
+                res = max(res,(r-l));
 
-                if(mp[nums[left]] == 0){
-                    mp.erase(nums[left]);
+                mp[nums[l]]--;
+
+                if(mp.find(nums[l]) == 0){
+                    mp.erase(nums[l]);
                 }
 
-                left++;
+                l++;
+
             }
         }
 
-        ans = max(ans,(n-left));
+        res = max(res,(r-l));
 
-        return ans;
+        return res;
         
     }
 };
