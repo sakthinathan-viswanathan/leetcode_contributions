@@ -2,27 +2,43 @@ class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
 
-        unordered_map<int,int> mp;
+        int n = nums.size();
+
+        unordered_map<int,int>mp;
 
         mp[0] = 1;
 
         int sum = 0;
         int count = 0;
 
-        for(int num : nums){
 
-            // current prefix sum
-            sum += num;
+        for(int i=0;i<n;i++){
 
-            // check required prefix
-            if(mp.find(sum-k) != mp.end()){
-                count += mp[sum-k];
+            sum += nums[i];
+
+
+            /*
+
+            subarray sum = currentPrefix - previousPrefix
+
+            We want:
+
+            currentPrefix - previousPrefix = k
+
+            Rearrange:
+
+            previousPrefix = currentPrefix - k
+
+            */
+
+            if(mp.find(sum - k) != mp.end()){
+                count += mp[sum - k];
             }
 
-            // store current prefix
             mp[sum]++;
         }
 
         return count;
+        
     }
 };
