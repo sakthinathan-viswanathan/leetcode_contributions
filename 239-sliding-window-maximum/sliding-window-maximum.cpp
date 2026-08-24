@@ -4,30 +4,30 @@ public:
 
         int n = nums.size();
 
-        deque<int>mq;
+        deque<int>dq;
+
         vector<int>res;
 
-        int left = 0;
-        for(int right=0;right<n;right++){
+        for(int i=0;i<n;i++){
 
-            while(!mq.empty() && nums[mq.back()] <= nums[right]){
-                mq.pop_back();
+            if(!dq.empty() && i-k >= dq.front()){
+                dq.pop_front();
             }
 
-            mq.push_back(right);
-
-            if((right-left+1) == k){
-                res.push_back(nums[mq.front()]);
-                left++;
+            while(!dq.empty() && nums[dq.back()] <= nums[i]) {
+                dq.pop_back();
             }
 
-            while(!mq.empty() && mq.front() < left){
-                mq.pop_front();
+            dq.push_back(i);
+
+            if(k-1 <= i){
+                res.push_back(nums[dq.front()]);
             }
 
-
+           
         }
 
         return res;
+        
     }
 };
