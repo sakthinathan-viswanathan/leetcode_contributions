@@ -8,22 +8,22 @@ public:
 
         vector<int>res(n);
 
-        for(int i = n*2-1;i>=0;i--){
+        for(int i=n*2-1;i>=0;i--){
 
-            while(!stk.empty() && stk.top() <= nums[i%n]){
+            while(!stk.empty() && nums[i %n] >= stk.top()){
                 stk.pop();
             }
 
             if(stk.empty()){
-                res[i%n] = -1;
+                res[i % n] = -1;
             }
-            else{
-                res[i % n] = stk.top();
+            else
+            {
+                res[i%n] = stk.top();
             }
 
-            stk.push(nums[i%n]);
+            stk.push(nums[i % n]);
         }
-
 
         return res;
         
