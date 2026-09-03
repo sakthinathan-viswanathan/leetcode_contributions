@@ -11,21 +11,16 @@
  */
 class Solution {
 public:
-
-    int recursion(TreeNode* root){
-
+    int maxDepth(TreeNode* root) {
+        
         if(root == nullptr){
             return 0;
         }
 
-        int l = recursion(root->left);
-        int r = recursion(root->right);
+        int l = maxDepth(root->left);
+        int r = maxDepth(root->right);
 
-        return max(l,r)+1;
-    }
-    int maxDepth(TreeNode* root) {
-        
+        return 1 + max(l,r);
 
-        return recursion(root);
     }
 };
