@@ -12,19 +12,21 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
+        
         return recursion(root);
     }
 
     TreeNode* recursion(TreeNode* root){
+
         if(root == nullptr){
-            return root;
+            return nullptr;
         }
 
-        
         swap(root->left,root->right);
 
-        TreeNode* l = invertTree(root->left);
-        TreeNode* r = invertTree(root->right);
+        TreeNode* l = recursion(root->left);
+
+        TreeNode* r = recursion(root->right);
 
         return root;
     }
