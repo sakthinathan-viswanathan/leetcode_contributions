@@ -19,10 +19,9 @@ public:
             return root;
         }
 
-        if(root == p || root == q){
+        if(root == nullptr || root == p || root == q){
             return root;
         }
-
         TreeNode* l = recursion(root->left,p,q);
         TreeNode* r = recursion(root->right,p,q);
 
@@ -30,6 +29,7 @@ public:
             return root;
         }
 
-        return l ? l : r;
+        return  (l ? l : r);  
+        
     }
 };
