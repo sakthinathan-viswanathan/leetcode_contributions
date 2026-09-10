@@ -13,8 +13,7 @@ public:
                 cand = nums[i];
                 count++;
             }
-            else if(cand == nums[i])
-            {
+            else if(cand == nums[i]){
                 count++;
             }
             else
@@ -22,6 +21,7 @@ public:
                 count--;
             }
         }
+
 
         return cand;
         
