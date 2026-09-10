@@ -4,21 +4,23 @@ public:
 
         int n = prices.size();
 
-        int max_profit = 0;
-
         int base = prices[0];
 
-        for(int i=1;i<n;i++)
-        {
-            int cur = prices[i]-base;
+        int max_profit = 0;
 
-            max_profit = max(max_profit,cur);
+        for(int i=1;i<n;i++){
+            
+            int diff = prices[i] - base;
 
-            if(prices[i] < base){
-                base = prices[i];
-            }
+            max_profit = max(max_profit,diff);
+
+
+            base = min(base,prices[i]);
+
+            
         }
-        
+
         return max_profit;
+        
     }
 };
