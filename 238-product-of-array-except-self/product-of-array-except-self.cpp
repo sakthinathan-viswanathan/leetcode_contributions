@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
 
-
         int n = nums.size();
 
         vector<int>res(n,1);
@@ -21,7 +20,9 @@ public:
             suf *= nums[i];
         }
 
+
         return res;
-        
+
     }
+
 };
