@@ -1,39 +1,45 @@
 class Solution {
 public:
     void solveSudoku(vector<vector<char>>& board) {
-        
         backtrack(board);
     }
 
     bool backtrack(vector<vector<char>>& board){
 
-        for(int row = 0;row<9;row++){
-            for(int col = 0;col<9;col++){
+        int n = board.size();
+        int m = board[0].size();
 
-                if(board[row][col]=='.'){
 
-                    for(char num='1';num<='9';num++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
 
-                        if(isvalid(board,row,col,num)){
-                            board[row][col]=num;
-                        
-                            if(backtrack(board))
+                if(board[i][j] == '.'){
+
+                    for(char k = '1';k <= '9';k++){
+
+                        if(isSafe(k,i,j,board)){
+                            board[i][j] = k;
+
+                            if(backtrack(board)){
                                 return true;
+                            }
 
-                            board[row][col]='.';    
+                            board[i][j] = '.';
 
                         }
                     }
-                return false;
-                  
+
+                    return false;
                 }
             }
         }
 
+
         return true;
     }
 
-    bool isvalid(vector<vector<char>>& board,int row,int col, char num){
+    bool isSafe(char num,int row,int col,vector<vector<char>>& board){
+
 
         for(int i=0;i<9;i++){
 
@@ -45,14 +51,14 @@ public:
                 return false;
             }
 
-            int subrow = 3 * (row/3)+i/3;
-            int subcol = 3 * (col/3)+i%3;
+            int subRow = 3 * (row/3) + (i/3);
+            int subCol = 3 * (col/3) + (i%3);
 
-            if(board[subrow][subcol] == num){
+            if(board[subRow][subCol] == num){
                 return false;
             }
-
         }
-            return true;
+
+        return true;
     }
 };
